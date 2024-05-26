@@ -6,7 +6,6 @@ export class AppService {
   constructor(private readonly mailService: MailerService) {}
 
   async logCreatedPetition(data) {
-    const message = `Petition created. Check it out at http://localhost:3000/petitions/${data.slug}`;
     console.log(
       `SENDING EMAIL TO ${data.creatorEmail} for Petition ${data.name}`,
     );
