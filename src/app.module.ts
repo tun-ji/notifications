@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ConfigModule } from '@nestjs/config';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -17,6 +19,13 @@ import { ConfigModule } from '@nestjs/config';
         auth: {
           user: process.env.EMAIL_USERNAME,
           pass: process.env.EMAIL_PASSWORD,
+        },
+      },
+      template: {
+        dir: join(__dirname, 'email_templates'),
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: true,
         },
       },
     }),
