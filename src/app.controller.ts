@@ -7,7 +7,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @EventPattern('petition-created')
-  logCreatedPetition(@Payload() createPetitionDto) {
-    return this.appService.logCreatedPetition(createPetitionDto);
+  async logCreatedPetition(@Payload() createPetitionDto) {
+    console.log('PETITION EMAIL REQUEST RECEIVED')
+    return await this.appService.logCreatedPetition(createPetitionDto);
   }
 }
