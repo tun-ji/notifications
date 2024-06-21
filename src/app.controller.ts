@@ -11,4 +11,10 @@ export class AppController {
     console.log('PETITION EMAIL REQUEST RECEIVED')
     return await this.appService.logCreatedPetition(createPetitionDto);
   }
+
+  @EventPattern('petition-signed')
+  async logSignedPetition(@Payload() createPetitionDto) {
+    console.log('SIGN PETITION EMAIL REQUEST RECEIVED')
+    return await this.appService.logSignedPetition(createPetitionDto);
+  }
 }
