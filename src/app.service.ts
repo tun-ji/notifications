@@ -11,7 +11,7 @@ export class AppService {
     );
     await this.mailService
       .sendMail({
-        from: 'Petitions NG <tomilolaa03@gmail.com>',
+        from: 'Petitions NG <petitions@beheard.com.ng>',
         to: data.creatorEmail,
         subject: `Petition Created: ${data.name}`,
         template: './PetCreated_Email',
