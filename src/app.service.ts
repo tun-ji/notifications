@@ -40,6 +40,7 @@ export class AppService {
     console.log(
       `SENDING EMAIL TO ${data.signatoryEmail} for Petition ${data.petition.name}`,
     );
+    console.log(data)
     await this.mailService
       .sendMail({
         from: 'Petitions NG <petitions@beheard.com.ng>',
