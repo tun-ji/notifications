@@ -10,6 +10,7 @@ async function bootstrap() {
       options: {
         urls: ['amqp://rabbitmq:rabbitmq@petitions-rabbitmq:5672'],
         queue: 'notifications-queue',
+        noAck: false,
       },
     },
   );

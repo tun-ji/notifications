@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 export class AppService {
   constructor(private readonly mailService: MailerService) {}
 
-  async logCreatedPetition(data) {
+  async logCreatedPetition(data, channel) {
     console.log(
       `SENDING EMAIL TO ${data.creatorEmail} for Petition ${data.name}`,
     );
@@ -25,6 +25,7 @@ export class AppService {
       })
       .then(() => {
         console.log(`PETIITON ${data.name} SENT FOR APPROVAL`);
+        channel.ack(data)
         return;
       })
       .catch((error) => {
@@ -55,7 +56,7 @@ export class AppService {
       })
       .then(() => {
         console.log(`PETIITON ${data.petition.name} SENT FOR APPROVAL`);
-        return;
+        return 'true';
       })
       .catch((error) => {
         console.error(error);
