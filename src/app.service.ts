@@ -9,8 +9,9 @@ export class AppService {
     console.log(
       `SENDING EMAIL TO ${data.creatorEmail} for Petition ${data.name}`,
     );
-    await this.mailService
-      .sendMail({
+
+    try {
+      await this.mailService.sendMail({
         from: 'Petitions NG <petitions@beheard.com.ng>',
         to: data.creatorEmail,
         subject: `Petition Created: ${data.name}`,
@@ -21,18 +22,13 @@ export class AppService {
           creatorName: data.creatorName.split(' ')[0],
           creatorEmail: data.creatorEmail,
           petitionTag: data.name.split(':')[0].split(' ').join(''),
-        },
+        }
       })
-      .then(() => {
-        console.log(`PETIITON ${data.name} SENT FOR APPROVAL`);
-        channel.ack(data)
-        return;
-      })
-      .catch((error) => {
-        console.error(error);
-        return;
-      });
-    // console.log(`PROBLEM SENDING PETIITON ${data.name} FOR APPROVAL`);
+      console.log(`PETIITON ${data.name} SENT FOR APPROVAL`);
+      channel.ack(data)
+    } catch (error) {
+      console.error(error);
+    }
     return;
   }
 
@@ -41,7 +37,10 @@ export class AppService {
       `SENDING EMAIL TO ${data.signatoryEmail} for Petition ${data.petition.name}`,
     );
     console.log(data)
-    await this.mailService
+
+
+    try {
+      await this.mailService
       .sendMail({
         from: 'Petitions NG <petitions@beheard.com.ng>',
         to: data.signatoryEmail,
@@ -54,16 +53,13 @@ export class AppService {
           signatoryEmail: data.signatoryEmail,
           petitionTag: data.petition.name.split(':')[0].split(' ').join(''),
         },
-      })
-      .then(() => {
-        console.log(`PETIITON ${data.petition.name} SENT FOR APPROVAL`);
-        return 'true';
-      })
-      .catch((error) => {
-        console.error(error);
-        return;
-      });
-    // console.log(`PROBLEM SENDING PETIITON ${data.name} FOR APPROVAL`);
+      })  
+      console.log(`PETIITON ${data.petition.name} SENT FOR APPROVAL`);
+      return 'true';    
+    } catch (error) {
+      console.error(error);      
+    }
+
     return;
   }
 
