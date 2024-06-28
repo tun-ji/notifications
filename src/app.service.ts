@@ -32,12 +32,10 @@ export class AppService {
     return;
   }
 
-  async logSignedPetition(data) {
+  async logSignedPetition(data, channel) {
     console.log(
       `SENDING EMAIL TO ${data.signatoryEmail} for Petition ${data.petition.name}`,
     );
-    console.log(data)
-
 
     try {
       await this.mailService
@@ -55,7 +53,7 @@ export class AppService {
         },
       })  
       console.log(`PETIITON ${data.petition.name} SENT FOR APPROVAL`);
-      return 'true';    
+      channel.ack(data) 
     } catch (error) {
       console.error(error);      
     }

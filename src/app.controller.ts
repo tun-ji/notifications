@@ -14,8 +14,9 @@ export class AppController {
   }
 
   @EventPattern('petition-signed')
-  async logSignedPetition(@Payload() createPetitionDto) {
+  async logSignedPetition(@Payload() createPetitionDto, @Ctx() context: RmqContext) {
+    const channel = context.getChannelRef()
     console.log('SIGN PETITION EMAIL REQUEST RECEIVED')
-    return await this.appService.logSignedPetition(createPetitionDto);
+    return await this.appService.logSignedPetition(createPetitionDto, channel);
   }
 }
