@@ -20,6 +20,8 @@ import { join } from 'path';
           user: process.env.EMAIL_USERNAME,
           pass: process.env.EMAIL_PASSWORD,
         },
+        pool: true,
+        maxConnections: 10
       },
       template: {
         dir: join(__dirname, 'email_templates'),
