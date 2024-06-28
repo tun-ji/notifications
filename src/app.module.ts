@@ -18,6 +18,8 @@ import { ConfigModule } from '@nestjs/config';
           user: process.env.EMAIL_USERNAME,
           pass: process.env.EMAIL_PASSWORD,
         },
+        pool: true,
+        maxConnections: 10
       },
     }),
   ],
